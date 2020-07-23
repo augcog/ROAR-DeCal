@@ -36,7 +36,9 @@ from ROAR_simulation.roar_autonomous_system.visualization_module.visualizer \
 )
 from ROAR_simulation.roar_autonomous_system.utilities_module.utilities import \
     png_to_depth, img_to_world
-from ROAR_simulation.roar_autonomous_system.utilities_module.occupancy_map import OccupancyGridMap
+from ROAR_simulation.roar_autonomous_system.utilities_module.occupancy_map \
+    import \
+    OccupancyGridMap
 
 import cv2
 import numpy as np
@@ -78,8 +80,6 @@ class WaypointFollowingAgent(Agent):
             f"rom {route_file_path.as_posix()}"
         )
 
-
-
     def run_step(self, vehicle: Vehicle,
                  sensors_data: SensorsData) -> VehicleControl:
         super(WaypointFollowingAgent, self).run_step(
@@ -102,10 +102,13 @@ class WaypointFollowingAgent(Agent):
                 # print(np.shape(depth_img))
                 world_cords = img_to_world(
                     depth_img=depth_img,
-                    intrinsics_matrix=self.front_depth_camera.intrinsics_matrix,
+                    intrinsics_matrix=self.front_depth_camera
+                        .intrinsics_matrix,
                     extrinsics_matrix=cam_world_matrix)
-                self.occupancy_grid_map.update_grid_map(world_cords_xy=world_cords[:2, :].T)
-                self.occupancy_grid_map.visualize(vehicle_location=self.vehicle.transform.location)
+                self.occupancy_grid_map.update_grid_map(
+                    world_cords_xy=world_cords[:2, :].T)
+                self.occupancy_grid_map.visualize(
+                    vehicle_location=self.vehicle.transform.location)
             except Exception as e:
                 print(f"Failed: {e}")
         return control
