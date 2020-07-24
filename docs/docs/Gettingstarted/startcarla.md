@@ -23,11 +23,11 @@
         - To switch to autonomous mode, open up `carla_runner.py` and scroll down the end, change the line `settings.enable_aut
         
 
-### Common Errors
-1. Conda not found 
+<!--### Common Errors
+'''1. Conda not found 
     - You should download miniconda3 Linux/Windows 64-bit [miniconda3](https://docs.conda.io/en/latest/miniconda.html)
     - Follow the below instructions to install miniconda successfully 
     ![](../Images/miniconda3.png)
     - If still cannot call conda, try (directory may vary):
         - `sudo chown -R /home/username/miniconda3/'`
-        - `sudo chmod -R +x /home/username/miniconda3/`
+        - `sudo chmod -R +x /home/username/miniconda3/` -->
