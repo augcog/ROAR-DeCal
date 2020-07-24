@@ -7,7 +7,7 @@ For more information regarding DeCal Course visit [roardecal](https://roar-decal
 *Note: For more information regarding DeCal Course visit [Roar Decal](https://roar-decal.github.io/ROAR.html).*
 
 
-![](images/ROAR-Car-2.png)
+
 >>>>>>> b6e17f5373ca1746cab801baae89bad6da23b471:docs/index.md
 
 ### **Getting Started**  
