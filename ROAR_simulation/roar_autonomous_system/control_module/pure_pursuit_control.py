@@ -55,7 +55,7 @@ class PurePursuitController(Controller):
         return control
 
 
-class LongitunalPurePursuitController:
+class LongitudinalPurePursuitController:
     def __init__(self, vehicle: Vehicle, target_speed=60, kp=0.1):
         self.vehicle = vehicle
         self.target_speed = target_speed
@@ -73,7 +73,7 @@ class LongitunalPurePursuitController:
         self.vehicle = vehicle
 
 
-class LatitunalPurePursuitController:
+class LatitudinalPurePursuitController:
     def __init__(
         self, vehicle: Vehicle, look_ahead_gain: float, look_ahead_distance: float
     ):
