@@ -8,7 +8,7 @@
     - `git clone https://github.com/augcog/ROAR-Sim.git`
 2. Download Carla Server package
     - [https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI](https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI)
-    - put it OUTSIDE of the `ROAR-Sim` folder, doesn't matter where
+    - put it OUTSIDE of the `ROAR-DeCal` folder, doesn't matter where
 3. Check your file directory, it should be:
     - `ROAR-DeCal`
         - `data`
