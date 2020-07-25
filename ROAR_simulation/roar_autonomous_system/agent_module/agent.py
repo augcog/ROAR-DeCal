@@ -4,9 +4,6 @@ from ROAR_simulation.roar_autonomous_system.utilities_module.vehicle_models \
     import (
     Vehicle,
 )
-from ROAR_simulation.roar_autonomous_system.utilities_module.camera_models \
-    import \
-    Camera
 from ROAR_simulation.roar_autonomous_system.utilities_module \
     .data_structures_models import (
     SensorsData,
@@ -19,9 +16,12 @@ from ROAR_simulation.roar_autonomous_system.utilities_module.vehicle_models \
 )
 from typing import Optional, List
 from pathlib import Path
-import os
 import cv2
 import numpy as np
+
+from ROAR_simulation.roar_autonomous_system.configurations.agent_settings \
+    import \
+    AgentConfig
 
 
 class Agent(ABC):
@@ -32,41 +32,51 @@ class Agent(ABC):
 
     """
 
-    def __init__(
-            self,
-            vehicle: Vehicle,
-            front_rgb_camera: Optional[Camera] = None,
-            front_depth_camera: Optional[Camera] = None,
-            rear_rgb_camera: Optional[Camera] = None,
-            imu: Optional[IMUData] = None,
-            output_folder_path: Path = Path(os.getcwd()),
-            should_save_sensor_data: bool = False
-    ):
-        """Initiating the Agent with given vehicle, front and back RGB
-        cameras, front depth camera and IMU sensor"""
+    def __init__(self,
+                 vehicle: Vehicle,
+                 agent_settings: AgentConfig,
+                 imu: Optional[IMUData] = None):
+        """
+        Initialize cameras, output folder, and logging utilities
+
+        Args:
+            vehicle: Vehicle instance
+            agent_settings: User specified settings for Agent
+            imu: IMU data (will be deprecated to be passed in like this)
+        """
+        self.logger = logging.getLogger(__name__)
 
         self.vehicle = vehicle
-        self.front_rgb_camera = front_rgb_camera
-        self.front_depth_camera = front_depth_camera
-        self.rear_rgb_camera = rear_rgb_camera
+        self.agent_settings = agent_settings
+        self.front_rgb_camera = agent_settings.front_rgb_cam
+        self.front_depth_camera = agent_settings.front_depth_cam
+        self.rear_rgb_camera = agent_settings.rear_rgb_cam
         self.imu = imu
-        self.logger = logging.getLogger(__name__)
-        self.transform_history: List[Transform] = []
-        self.output_folder_path = output_folder_path
-        self.front_depth_camera_output_folder_path = output_folder_path / \
-                                                     "front_depth"
-        self.front_rgb_camera_output_folder_path = output_folder_path / \
-                                                   "front_rgb"
-        self.rear_rgb_camera_output_folder_path = output_folder_path / \
-                                                  "rear_rgb"
-        self.should_save_sensor_data = should_save_sensor_data
+
+        self.output_folder_path = \
+            Path(self.agent_settings.output_data_folder_path)
+        self.front_depth_camera_output_folder_path = \
+            self.output_folder_path / "front_depth"
+        self.front_rgb_camera_output_folder_path = \
+            self.output_folder_path / "front_rgb"
+        self.rear_rgb_camera_output_folder_path = \
+            self.output_folder_path / "rear_rgb"
+        self.should_save_sensor_data = self.agent_settings.save_sensor_data
+
         self.time_counter = 0
+
+        self.transform_history: List[Transform] = []
 
         self.init_cam()
 
-    def init_cam(self):
-        """Calculate intrinsic matrices for each existing camera (front/back
-         RGB and front depth). """
+    def init_cam(self) -> None:
+        """
+        Initialize the cameras by calculating the camera intrinsics and
+        ensuring that the output folder path exists
+
+        Returns:
+            None
+        """
 
         if self.front_rgb_camera is not None:
             self.front_rgb_camera.intrinsics_matrix = (
@@ -110,8 +120,17 @@ class Agent(ABC):
             self.save_sensor_data()
         return VehicleControl()
 
-    def sync_data(self, sensors_data: SensorsData, vehicle: Vehicle):
-        """Syncing the data from cameras with the ROAR Agent's camera data. """
+    def sync_data(self, sensors_data: SensorsData, vehicle: Vehicle) -> None:
+        """
+        Sync agent's state by updating Sensor Data and vehicle information
+
+        Args:
+            sensors_data: the new frame's sensor data
+            vehicle: the new frame's vehicle state
+
+        Returns:
+            None
+        """
 
         self.vehicle = vehicle
 
@@ -139,7 +158,14 @@ class Agent(ABC):
         if self.imu is not None:
             self.imu = sensors_data.imu_data
 
-    def save_sensor_data(self):
+    def save_sensor_data(self) -> None:
+        """
+        Failure-safe saving function that saves all the sensor data of the
+        current frame
+
+        Returns:
+            None
+        """
         try:
             cv2.imwrite((self.front_rgb_camera_output_folder_path /
                          f"frame_{self.time_counter}.png").as_posix(),
@@ -154,4 +180,4 @@ class Agent(ABC):
                         self.rear_rgb_camera.data)
         except Exception as e:
             self.logger.error(
-                f"Failed to save at {self.time_counter}. Error: {e}")
+                f"Failed to save at Frame {self.time_counter}. Error: {e}")
