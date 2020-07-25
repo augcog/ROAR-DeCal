@@ -1,6 +1,6 @@
 - ROAR
     - bridges - Sync data between different sources and Agent
-    - carla_client - Custimized Module responsible for initializing and communicating with the Carla Server
+    - carla_client - Customized Module responsible for initializing and communicating with the Carla Server
     - roar_autonomous_system
         - agent_module - Declaration and implementation of different Agents
         - control_module - Declaration and implementation of different Controllers

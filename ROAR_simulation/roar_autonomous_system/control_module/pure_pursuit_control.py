@@ -17,62 +17,7 @@ Citation: https://github.com/AtsushiSakai/PythonRobotics/blob/master
 /PathTracking/pure_pursuit/pure_pursuit.py
 """
 
-
-class PurePursuitController(Controller):
-    def __init__(
-            self,
-            vehicle: Vehicle,
-            look_ahead_gain: float = 0.1,
-            look_ahead_distance: float = 2,
-            target_speed=60,
-    ):
-        """
-
-        Args:
-            vehicle: Vehicle information
-            look_ahead_gain: Look ahead factor
-            look_ahead_distance: look ahead distance
-            target_speed: desired longitudinal speed to maintain
-        """
-
-        super(PurePursuitController, self).__init__(vehicle=vehicle)
-        self.target_speed = target_speed
-        self.look_ahead_gain = look_ahead_gain
-        self.look_ahead_distance = look_ahead_distance
-        self.latitunal_controller = LatitunalPurePursuitController(
-            vehicle=self.vehicle,
-            look_ahead_gain=look_ahead_gain,
-            look_ahead_distance=look_ahead_distance,
-        )
-        self.longitunal_controller = LongitunalPurePursuitController(
-            vehicle=self.vehicle, target_speed=target_speed
-        )
-
-    def run_step(
-            self, vehicle: Vehicle, next_waypoint: Transform, **kwargs
-    ) -> VehicleControl:
-        """
-        run one step of Pure Pursuit Control
-
-        Args:
-            vehicle: current vehicle state
-            next_waypoint: Next waypoint, Transform
-            **kwargs:
-
-        Returns:
-            Vehicle Control
-
-        """
-        control = VehicleControl(
-            throttle=self.longitunal_controller.run_step(vehicle=vehicle),
-            steering=self.latitunal_controller.run_step(
-                vehicle=vehicle, next_waypoint=next_waypoint
-            ),
-        )
-        return control
-
-
-class LongitunalPurePursuitController:
+class LongitudinalPurePursuitController:
     def __init__(self, vehicle: Vehicle, target_speed=60, kp=0.1):
         self.vehicle = vehicle
         self.target_speed = target_speed
@@ -91,7 +36,7 @@ class LongitunalPurePursuitController:
         self.vehicle = vehicle
 
 
-class LatitunalPurePursuitController:
+class LatitudinalPurePursuitController:
     def __init__(
             self, vehicle: Vehicle, look_ahead_gain: float,
             look_ahead_distance: float
@@ -123,3 +68,60 @@ class LatitunalPurePursuitController:
 
     def sync(self, vehicle: Vehicle):
         self.vehicle = vehicle
+
+
+class PurePursuitController(Controller):
+    def __init__(
+            self,
+            vehicle: Vehicle,
+            look_ahead_gain: float = 0.1,
+            look_ahead_distance: float = 2,
+            target_speed=60,
+    ):
+        """
+
+        Args:
+            vehicle: Vehicle information
+            look_ahead_gain: Look ahead factor
+            look_ahead_distance: look ahead distance
+            target_speed: desired longitudinal speed to maintain
+        """
+
+        super(PurePursuitController, self).__init__(vehicle=vehicle)
+        self.target_speed = target_speed
+        self.look_ahead_gain = look_ahead_gain
+        self.look_ahead_distance = look_ahead_distance
+        self.latitunal_controller = LatitudinalPurePursuitController(
+            vehicle=self.vehicle,
+            look_ahead_gain=look_ahead_gain,
+            look_ahead_distance=look_ahead_distance,
+        )
+        self.longitunal_controller = LongitudinalPurePursuitController(
+            vehicle=self.vehicle, target_speed=target_speed
+        )
+
+    def run_step(
+            self, vehicle: Vehicle, next_waypoint: Transform, **kwargs
+    ) -> VehicleControl:
+        """
+        run one step of Pure Pursuit Control
+
+        Args:
+            vehicle: current vehicle state
+            next_waypoint: Next waypoint, Transform
+            **kwargs:
+
+        Returns:
+            Vehicle Control
+
+        """
+        control = VehicleControl(
+            throttle=self.longitunal_controller.run_step(vehicle=vehicle),
+            steering=self.latitunal_controller.run_step(
+                vehicle=vehicle, next_waypoint=next_waypoint
+            ),
+        )
+        return control
+
+
+

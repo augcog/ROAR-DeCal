@@ -1,0 +1,12 @@
+# Documentation for Control
+
+
+::: ROAR_simulation.roar_autonomous_system.control_module.controller.Controller
+::: ROAR_simulation.roar_autonomous_system.control_module.pid_controller.VehiclePIDController
+::: ROAR_simulation.roar_autonomous_system.control_module.pid_controller.PIDLongitudinalController
+::: ROAR_simulation.roar_autonomous_system.control_module.pid_controller.PIDLateralController
+::: ROAR_simulation.roar_autonomous_system.control_module.pure_pursuit_control.PurePursuitController
+::: ROAR_simulation.roar_autonomous_system.control_module.pure_pursuit_control.LongitudinalPurePursuitController
+::: ROAR_simulation.roar_autonomous_system.control_module.pure_pursuit_control.LatitudinalPurePursuitController
+
+
