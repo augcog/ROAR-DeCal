@@ -6,11 +6,11 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="Robot Autonomous Racing DeCal is a course dedicated to teaching students to gain a holistic view and hands-on(virtual) experiences about building a high-performance fully-autonomous 1/10 scale RC car from scratch." name="description"/>
-<link href="https://roar-decal.github.io/Carla/code_documentations/roar_autonomous_system/planning/local_planners/" rel="canonical"/>
+<link href="https://roar-decal.github.io/code_documentations/roar_autonomous_system/planning/local_planners/" rel="canonical"/>
 <link href="../../../../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.4.0" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.3" name="generator"/>
 <title>Local Planner - ROAR</title>
-<link href="../../../../assets/stylesheets/main.fe0cca5b.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/main.947af8d5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -20,7 +20,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner">
+<a class="md-skip" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.local_planner">
           Skip to content
         </a>
 </div>
@@ -28,7 +28,7 @@
 </div>
 <header class="md-header" data-md-component="header">
 <nav aria-label="Header" class="md-header-nav md-grid">
-<a aria-label="ROAR" class="md-header-nav__button md-logo" href="https://roar-decal.github.io/Carla/" title="ROAR">
+<a aria-label="ROAR" class="md-header-nav__button md-logo" href="https://roar-decal.github.io/" title="ROAR">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
 </a>
 <label class="md-header-nav__button md-icon" for="__drawer">
@@ -84,7 +84,7 @@
 <div class="md-sidebar__inner">
 <nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
-<a aria-label="ROAR" class="md-nav__button md-logo" href="https://roar-decal.github.io/Carla/" title="ROAR">
+<a aria-label="ROAR" class="md-nav__button md-logo" href="https://roar-decal.github.io/" title="ROAR">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
 </a>
     ROAR
@@ -98,13 +98,42 @@
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
 <label class="md-nav__link" for="nav-2">
+      Quick Start
+      <span class="md-nav__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"></path></svg>
+</span>
+</label>
+<nav aria-label="Quick Start" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="nav-2">
+<span class="md-nav__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</span>
+        Quick Start
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../../getting_started/quick_start/" title="Installation">
+      Installation
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../../getting_started/configurations/" title="Configurations">
+      Configurations
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
+<label class="md-nav__link" for="nav-3">
       Project Overview
       <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"></path></svg>
 </span>
 </label>
 <nav aria-label="Project Overview" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="nav-2">
+<label class="md-nav__title" for="nav-3">
 <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
 </span>
@@ -125,15 +154,15 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
-<label class="md-nav__link" for="nav-3">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-4" id="nav-4" type="checkbox"/>
+<label class="md-nav__link" for="nav-4">
       Code Documentations
       <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"></path></svg>
 </span>
 </label>
 <nav aria-label="Code Documentations" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="nav-3">
+<label class="md-nav__title" for="nav-4">
 <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
 </span>
@@ -146,15 +175,15 @@
     </a>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2" id="nav-3-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-3-2">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2" id="nav-4-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-4-2">
       ROAR Autonomous System
       <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"></path></svg>
 </span>
 </label>
 <nav aria-label="ROAR Autonomous System" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="nav-3-2">
+<label class="md-nav__title" for="nav-4-2">
 <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
 </span>
@@ -182,15 +211,15 @@
     </a>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2-5" id="nav-3-2-5" type="checkbox"/>
-<label class="md-nav__link" for="nav-3-2-5">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2-5" id="nav-4-2-5" type="checkbox"/>
+<label class="md-nav__link" for="nav-4-2-5">
       Planning
       <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"></path></svg>
 </span>
 </label>
 <nav aria-label="Planning" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="nav-3-2-5">
+<label class="md-nav__title" for="nav-4-2-5">
 <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
 </span>
@@ -226,64 +255,6 @@
       Table of contents
     </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner">
-    gpd_only_local_planner
-  </a>
-<nav aria-label="gpd_only_local_planner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner">
-    SemanticSegmentationOnlyPlanner
-  </a>
-<nav aria-label="SemanticSegmentationOnlyPlanner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.__init__">
-    __init__()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_done">
-    is_done()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_front_clear">
-    is_front_clear()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_left_clear">
-    is_left_clear()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_right_clear">
-    is_right_clear()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.run_step">
-    run_step()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.set_mission_plan">
-    set_mission_plan()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.sync">
-    sync()
-  </a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.local_planner">
     local_planner
@@ -357,15 +328,15 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2-6" id="nav-3-2-6" type="checkbox"/>
-<label class="md-nav__link" for="nav-3-2-6">
+<input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2-6" id="nav-4-2-6" type="checkbox"/>
+<label class="md-nav__link" for="nav-4-2-6">
       Utilities
       <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"></path></svg>
 </span>
 </label>
 <nav aria-label="Utilities" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="nav-3-2-6">
+<label class="md-nav__title" for="nav-4-2-6">
 <span class="md-nav__icon md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
 </span>
@@ -412,64 +383,6 @@
       Table of contents
     </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner">
-    gpd_only_local_planner
-  </a>
-<nav aria-label="gpd_only_local_planner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner">
-    SemanticSegmentationOnlyPlanner
-  </a>
-<nav aria-label="SemanticSegmentationOnlyPlanner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.__init__">
-    __init__()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_done">
-    is_done()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_front_clear">
-    is_front_clear()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_left_clear">
-    is_left_clear()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_right_clear">
-    is_right_clear()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.run_step">
-    run_step()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.set_mission_plan">
-    set_mission_plan()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.sync">
-    sync()
-  </a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.local_planner">
     local_planner
@@ -547,489 +460,6 @@
 <div class="doc doc-object doc-module">
 <div class="doc doc-contents first">
 <div class="doc doc-children">
-<div class="doc doc-object doc-module">
-<h2 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner">
-<code>gpd_only_local_planner</code>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner" title="Permanent link">¤</a></h2>
-<div class="doc doc-contents">
-<div class="doc doc-children">
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner">
-<code>SemanticSegmentationOnlyPlanner</code>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner" title="Permanent link">¤</a></h3>
-<div class="doc doc-contents">
-<div class="doc doc-children">
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">gpd_detector</span><span class="p">,</span> <span class="n">next_waypoint_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_turn_degree</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.__init__" title="Permanent link">¤</a></h4>
-<div class="doc doc-contents">
-<details class="quote">
-<summary>Source code in <code>ROAR_simulation/roar_autonomous_system/planning_module/local_planner/gpd_only_local_planner.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">vehicle</span><span class="p">:</span> <span class="n">Vehicle</span><span class="p">,</span>
-    <span class="n">controller</span><span class="p">:</span> <span class="n">Controller</span><span class="p">,</span>
-    <span class="n">gpd_detector</span><span class="p">:</span> <span class="n">SemanticSegmentationDetector</span><span class="p">,</span>
-    <span class="n">next_waypoint_distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="n">max_turn_degree</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-<span class="p">):</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">gpd_detector</span> <span class="o">=</span> <span class="n">gpd_detector</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_next_waypoint_distance</span> <span class="o">=</span> <span class="n">next_waypoint_distance</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_max_turn_degree</span> <span class="o">=</span> <span class="n">max_turn_degree</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_carla_distance_to_pixel_scaling</span> <span class="o">=</span> <span class="mi">10</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_done">
-<code class="highlight language-python">
-is_done<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_done" title="Permanent link">¤</a></h4>
-<div class="doc doc-contents">
-<details class="quote">
-<summary>Source code in <code>ROAR_simulation/roar_autonomous_system/planning_module/local_planner/gpd_only_local_planner.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>75
-76</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">is_done</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="kc">False</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_front_clear">
-<code class="highlight language-python">
-is_front_clear<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_front_clear" title="Permanent link">¤</a></h4>
-<div class="doc doc-contents">
-<p>Take a block of 10 x 10 in next_waypoint_distance front and see if they are all NOT white.</p>
-<p><strong>Returns:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>bool</code></td>
-<td>
-<p>True if the block is all None white, false otherwise</p>
-</td>
-</tr>
-</tbody>
-</table>
-<details class="quote">
-<summary>Source code in <code>ROAR_simulation/roar_autonomous_system/planning_module/local_planner/gpd_only_local_planner.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">is_front_clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Take a block of 10 x 10 in next_waypoint_distance front and see if they are all NOT white.</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        True if the block is all None white, false otherwise</span>
-<span class="sd">    """</span>
-    <span class="c1"># center_pixel = self._next_waypoint_distance * self._carla_distance_to_pixel_scaling  # this variable is guessing</span>
-    <span class="c1"># Y, X, _ = np.shape(self.gpd_detector.curr_depth.data)</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">324</span>
-    <span class="n">factor</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">ground_section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpd_detector</span><span class="o">.</span><span class="n">curr_ground</span><span class="p">[</span><span class="mi">320</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span> <span class="n">X</span> <span class="o">-</span> <span class="n">factor</span> <span class="p">:</span> <span class="n">X</span> <span class="o">+</span> <span class="n">factor</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">ground_section</span><span class="p">)</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_left_clear">
-<code class="highlight language-python">
-is_left_clear<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_left_clear" title="Permanent link">¤</a></h4>
-<div class="doc doc-contents">
-<p>Take a block of 10 x 10 to degree left, and next_waypoint_distance and see if they are all NOT white.</p>
-<p><strong>Returns:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>bool</code></td>
-<td>
-<p>True if the block is all None white, false otherwise</p>
-</td>
-</tr>
-</tbody>
-</table>
-<details class="quote">
-<summary>Source code in <code>ROAR_simulation/roar_autonomous_system/planning_module/local_planner/gpd_only_local_planner.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span> 97
- 98
- 99
-100
-101
-102
-103
-104
-105
-106</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">is_left_clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Take a block of 10 x 10 to degree left, and next_waypoint_distance and see if they are all NOT white.</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        True if the block is all None white, false otherwise</span>
-<span class="sd">    """</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">324</span>
-    <span class="n">factor</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">ground_section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpd_detector</span><span class="o">.</span><span class="n">curr_ground</span><span class="p">[</span><span class="mi">330</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span> <span class="n">X</span> <span class="o">-</span> <span class="n">factor</span> <span class="p">:</span> <span class="n">X</span> <span class="o">+</span> <span class="n">factor</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">ground_section</span><span class="p">)</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_right_clear">
-<code class="highlight language-python">
-is_right_clear<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.is_right_clear" title="Permanent link">¤</a></h4>
-<div class="doc doc-contents">
-<p>Take a block of 10 x 10 to degree right, and next_waypoint_distance and see if they are all NOT white.</p>
-<p><strong>Returns:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>bool</code></td>
-<td>
-<p>True if the block is all None white, false otherwise</p>
-</td>
-</tr>
-</tbody>
-</table>
-<details class="quote">
-<summary>Source code in <code>ROAR_simulation/roar_autonomous_system/planning_module/local_planner/gpd_only_local_planner.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">is_right_clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Take a block of 10 x 10 to degree right, and next_waypoint_distance and see if they are all NOT white.</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        True if the block is all None white, false otherwise</span>
-<span class="sd">    """</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">324</span>
-    <span class="n">factor</span> <span class="o">=</span> <span class="mi">10</span>
-
-    <span class="n">ground_section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpd_detector</span><span class="o">.</span><span class="n">curr_ground</span><span class="p">[</span><span class="mi">320</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span> <span class="n">X</span> <span class="o">-</span> <span class="n">factor</span> <span class="p">:</span> <span class="n">X</span> <span class="o">+</span> <span class="n">factor</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">ground_section</span><span class="p">)</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.run_step">
-<code class="highlight language-python">
-run_step<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">)</span> </code>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.run_step" title="Permanent link">¤</a></h4>
-<div class="doc doc-contents">
-<p>Get data from GPD_Detector
-    if front is clear
-        put a waypoint in front of the vehicle
-    if front is blocked, both left and right are clear,
-        put a point at random to the left or right of the vehicle
-    if front is blocked, left is blocked, right is clear
-        put a point to the right of the vehicle
-    if front is blocked, right is blocked, left is clear
-        put a point to the left of the vehicle
-    if front, right, and left are all blocked
-        stop (return a control that does nothing)</p>
-<p><strong>Returns:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>VehicleControl</code></td>
-<td>
-<p>VehicleControl object</p>
-</td>
-</tr>
-</tbody>
-</table>
-<details class="quote">
-<summary>Source code in <code>ROAR_simulation/roar_autonomous_system/planning_module/local_planner/gpd_only_local_planner.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">run_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">:</span> <span class="n">Vehicle</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VehicleControl</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Get data from GPD_Detector</span>
-<span class="sd">        if front is clear</span>
-<span class="sd">            put a waypoint in front of the vehicle</span>
-<span class="sd">        if front is blocked, both left and right are clear,</span>
-<span class="sd">            put a point at random to the left or right of the vehicle</span>
-<span class="sd">        if front is blocked, left is blocked, right is clear</span>
-<span class="sd">            put a point to the right of the vehicle</span>
-<span class="sd">        if front is blocked, right is blocked, left is clear</span>
-<span class="sd">            put a point to the left of the vehicle</span>
-<span class="sd">        if front, right, and left are all blocked</span>
-<span class="sd">            stop (return a control that does nothing)</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        VehicleControl object</span>
-<span class="sd">    """</span>
-    <span class="nb">super</span><span class="p">(</span><span class="n">SemanticSegmentationOnlyPlanner</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run_step</span><span class="p">(</span><span class="n">vehicle</span><span class="o">=</span><span class="n">vehicle</span><span class="p">)</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpd_detector</span><span class="o">.</span><span class="n">curr_ground</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">VehicleControl</span><span class="p">()</span>
-    <span class="n">curr_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">location</span>
-    <span class="n">is_front_clear</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_front_clear</span><span class="p">()</span>
-    <span class="n">is_left_clear</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_left_clear</span><span class="p">()</span>
-    <span class="n">is_right_clear</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_right_clear</span><span class="p">()</span>
-    <span class="n">copy_depth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpd_detector</span><span class="o">.</span><span class="n">semantic_segmentation</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">copy_depth</span><span class="p">[</span><span class="mi">320</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span> <span class="mi">200</span> <span class="o">-</span> <span class="mi">10</span> <span class="p">:</span> <span class="mi">200</span> <span class="o">+</span> <span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># left</span>
-    <span class="n">copy_depth</span><span class="p">[</span><span class="mi">330</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span> <span class="mi">400</span> <span class="o">-</span> <span class="mi">10</span> <span class="p">:</span> <span class="mi">400</span> <span class="o">+</span> <span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># straight</span>
-    <span class="n">copy_depth</span><span class="p">[</span><span class="mi">320</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span> <span class="mi">600</span> <span class="o">-</span> <span class="mi">10</span> <span class="p">:</span> <span class="mi">600</span> <span class="o">+</span> <span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># right</span>
-    <span class="n">next_way_point</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">is_front_clear</span><span class="p">:</span>
-        <span class="c1"># generate front waypoint</span>
-        <span class="c1"># print("Going Straight")</span>
-        <span class="k">return</span> <span class="n">VehicleControl</span><span class="p">(</span><span class="n">throttle</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">steering</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">elif</span> <span class="n">is_right_clear</span><span class="p">:</span>
-        <span class="c1"># print("Turning Right")</span>
-        <span class="k">return</span> <span class="n">VehicleControl</span><span class="p">(</span><span class="n">throttle</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">steering</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">is_left_clear</span><span class="p">:</span>
-        <span class="c1"># print("Turning Left")</span>
-        <span class="k">return</span> <span class="n">VehicleControl</span><span class="p">(</span><span class="n">throttle</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">steering</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># print("I am stucked")</span>
-        <span class="k">return</span> <span class="n">VehicleControl</span><span class="p">()</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.set_mission_plan">
-<code class="highlight language-python">
-set_mission_plan<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.set_mission_plan" title="Permanent link">¤</a></h4>
-<div class="doc doc-contents">
-<details class="quote">
-<summary>Source code in <code>ROAR_simulation/roar_autonomous_system/planning_module/local_planner/gpd_only_local_planner.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>78
-79</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_mission_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">pass</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.sync">
-<code class="highlight language-python">
-sync<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<a class="headerlink" href="#ROAR_simulation.roar_autonomous_system.planning_module.local_planner.gpd_only_local_planner.SemanticSegmentationOnlyPlanner.sync" title="Permanent link">¤</a></h4>
-<div class="doc doc-contents">
-<details class="quote">
-<summary>Source code in <code>ROAR_simulation/roar_autonomous_system/planning_module/local_planner/gpd_only_local_planner.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>81
-82</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">sync</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">pass</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="ROAR_simulation.roar_autonomous_system.planning_module.local_planner.local_planner">
 <code>local_planner</code>
@@ -1716,14 +1146,14 @@ Assuming that this current run will run all the way to the end</p>
 </div>
 </footer>
 </div>
-<script src="../../../../assets/javascripts/vendor.d710d30a.min.js"></script>
-<script src="../../../../assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../../../../assets/javascripts/vendor.c3dc8c49.min.js"></script>
+<script src="../../../../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "../../../..",
           features: [],
           search: Object.assign({
-            worker: "../../../../assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../../../../assets/javascripts/worker/search.8e2cddea.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
