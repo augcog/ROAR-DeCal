@@ -19,7 +19,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from ROAR_simulation.roar_autonomous_system.configurations.agent_settings \
+from ROAR_simulation.roar_autonomous_system.utilities_module.agent_config \
     import \
     AgentConfig
 

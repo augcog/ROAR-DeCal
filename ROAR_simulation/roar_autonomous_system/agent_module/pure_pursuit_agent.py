@@ -18,18 +18,9 @@ from ROAR_simulation.roar_autonomous_system.planning_module.behavior_planner \
 from ROAR_simulation.roar_autonomous_system.planning_module.local_planner \
     .simple_waypoint_following_local_planner import \
     SimpleWaypointFollowingLocalPlanner
-from ROAR_simulation.roar_autonomous_system.visualization_module.visualizer \
-    import \
-    Visualizer
-from ROAR_simulation.roar_autonomous_system.configurations.agent_settings \
+from ROAR_simulation.roar_autonomous_system.utilities_module.agent_config \
     import \
     AgentConfig
-from ROAR_simulation.roar_autonomous_system.utilities_module.occupancy_map import OccupancyGridMap
-from ROAR_simulation.roar_autonomous_system.utilities_module.utilities import img_to_world
-from ROAR_simulation.roar_autonomous_system.perception_module.point_cloud_detector import PointCloudDetector
-import numpy as np
-import cv2
-from ROAR_simulation.roar_autonomous_system.utilities_module.utilities import png_to_depth
 
 
 class PurePursuitAgent(Agent):

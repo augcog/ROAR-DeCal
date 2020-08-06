@@ -19,14 +19,6 @@ sys.path.append(carla_client_egg_file_path.as_posix())
 from pydantic import BaseModel, Field
 from ROAR_simulation.carla_client.util.utilities import CarlaWeathers, \
     CarlaWeather, CarlaCarColors, CarlaCarColor
-from pathlib import Path
-from typing import Optional
-from ROAR_simulation.roar_autonomous_system.utilities_module.camera_models \
-    import \
-    Camera
-from ROAR_simulation.roar_autonomous_system.utilities_module\
-    .data_structures_models import \
-    Location, Rotation, Transform
 
 
 class CarlaConfig(BaseModel):

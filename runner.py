@@ -1,18 +1,12 @@
 import logging
-from ROAR_simulation.roar_autonomous_system.agent_module.pure_pursuit_agent \
-    import PurePursuitAgent
-from ROAR_simulation.roar_autonomous_system.agent_module.mpc_agent import MPCAgent
 from ROAR_simulation.roar_autonomous_system.agent_module.pid_agent import PIDAgent
 from pathlib import Path
 
 import numpy as np
 import os
 import warnings
-from ROAR_simulation.roar_autonomous_system.configurations.configuration import Configuration
+from ROAR_simulation.carla_client.carla_roar_config import Configuration
 from ROAR_simulation.carla_client.carla_runner import CarlaRunner
-from ROAR_simulation.roar_autonomous_system.agent_module.gpd_agent import GPDAgent
-from ROAR_simulation.roar_autonomous_system.agent_module.map_generating_agent import MapGeneratingAgent
-from ROAR_simulation.roar_autonomous_system.agent_module.point_cloud_agent import PointCloudAgent
 
 
 def main():

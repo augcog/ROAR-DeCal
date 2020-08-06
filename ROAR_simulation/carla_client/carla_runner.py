@@ -1,4 +1,4 @@
-from ROAR_simulation.carla_client.carla_settings import CarlaConfig
+from ROAR_simulation.carla_client.carla_config import CarlaConfig
 import logging
 import pygame
 from ROAR_simulation.roar_autonomous_system.utilities_module \
@@ -14,7 +14,7 @@ import carla
 from ROAR_simulation.carla_client.util.hud import HUD
 from ROAR_simulation.carla_client.util.world import World
 from ROAR_simulation.carla_client.util.keyboard_control import KeyboardControl
-from ROAR_simulation.roar_autonomous_system.configurations.agent_settings \
+from ROAR_simulation.roar_autonomous_system.utilities_module.agent_config \
     import \
     AgentConfig
 from carla import ColorConverter as cc

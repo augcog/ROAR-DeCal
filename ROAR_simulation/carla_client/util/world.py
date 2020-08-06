@@ -4,7 +4,7 @@ import logging
 import random
 import sys
 from ROAR_simulation.bridges.carla_bridge import CarlaBridge
-from ROAR_simulation.carla_client.carla_settings import CarlaConfig
+from ROAR_simulation.carla_client.carla_config import CarlaConfig
 from ROAR_simulation.carla_client.util.hud import HUD
 
 from ROAR_simulation.carla_client.util.utilities import CarlaCarColor, \
@@ -12,13 +12,11 @@ from ROAR_simulation.carla_client.util.utilities import CarlaCarColor, \
 from ROAR_simulation.carla_client.util.sensors import CollisionSensor, \
     GnssSensor, LaneInvasionSensor, IMUSensor, RadarSensor
 from ROAR_simulation.carla_client.util.camera_manager import CameraManager
-from ROAR_simulation.roar_autonomous_system.configurations.agent_settings \
+from ROAR_simulation.roar_autonomous_system.utilities_module.agent_config \
     import \
     AgentConfig
 import weakref
-from ROAR_simulation.roar_autonomous_system.agent_module.pure_pursuit_agent import PurePursuitAgent, Agent
 from typing import List, Dict, Tuple, Any
-from pathlib import Path
 
 
 class World(object):
