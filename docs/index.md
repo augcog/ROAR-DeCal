@@ -61,9 +61,6 @@ WARNING: sensor object went out of the scope but the sensor is still alive in th
     - Another method is to turn off the display (this will just make it SLIGHTLY faster), but this is only available on Linux
         - `DISPLAY= ./CarlaUE4.sh -opengl`
     - Last method is to understand and tryout Carla's [Synchronized Mode](https://carla.readthedocs.io/en/0.9.9/adv_synchrony_timestep/#client-server-synchrony)
-        - You may modify the default values at `ROAR_simulation/carla_client/carla_settings.py`
-            - `fixed_delta_seconds`
-            - `no_rendering_mode`
-            - `synchronoous_mode`
+        - You may modify the default values at [configurations](getting_started/configurations/#carla)
             
     

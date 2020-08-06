@@ -6,7 +6,9 @@ theme:
 
 nav:
   - Home: index.md
-  - Quick Start: getting_started/quick_start.md
+  - Quick Start:
+      - Installation: getting_started/quick_start.md
+      - Configurations: getting_started/configurations.md
   - Project Overview:
       - Project Module TAD: project_overview/project_module_TADs.md
       - Code Layout: project_overview/code_layout.md
