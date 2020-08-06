@@ -17,12 +17,18 @@ class VehicleControl(BaseModel):
 
     def get_throttle(self) -> float:
         """
-        Cap it between -1  and 1
-        :return:
+        throttle it between -1  and 1
+        Returns:
+            float between -1, 1
         """
         return self.clamp(self.throttle, -1, 1)
 
     def get_steering(self) -> float:
+        """
+        Steering between -1, 1
+        Returns:
+            float between 01, 1
+        """
         return self.clamp(self.steering, -1, 1)
 
 
@@ -41,12 +47,14 @@ class Vehicle(BaseModel):
     )
 
     @staticmethod
-    def get_speed(vehicle):
+    def get_speed(vehicle) -> float:
         """
         Compute speed of a vehicle in Km/h.
+        Args:
+            vehicle: the vehicle for which speed is calculated
 
-            :param vehicle: the vehicle for which speed is calculated
-            :return: speed as a float in Km/h
+        Returns:
+            speed as a float in Km/h
         """
         vel = vehicle.velocity
         return 3.6 * math.sqrt(vel.x ** 2 + vel.y ** 2 + vel.z ** 2)
