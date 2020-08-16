@@ -53,7 +53,29 @@
     
     
 #### Mac
-@Sunny, please fill in here
+1. Press and hold the Option (or Alt) ⌥ key during startup to switch to Windows.
+2. Clone the repo
+    - `git clone https://github.com/augcog/ROAR-DeCal.git && cd ROAR-Decal`
+3. Download Carla Server package
+    - [https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI](https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI)
+    - put it OUTSIDE of the `ROAR-DeCal` folder, doesn't matter where
+4. Download data
+    - `./download_data.bat`
+5. Check your file directory, it should be:
+    - `ROAR-Sim`
+        - `data`
+            - `easy_map_waypoints.txt`
+            - `... other data files`
+        - `ROAR_simulation`
+        - `runner.py`
+        - ... other files and folders
+6. Create virtual environment and install dependencies on Anaconda Prompt
+    - `conda create -n ROAR python=3.7`
+    - `conda activate ROAR`
+    - `pip install -r requirements.txt`
+7. Enjoy
+    - `CarlaUE4.exe` file in the Carla Server package to launch the server
+    - `python runner.py`
 
 ### Common Errors
 1. Conda not found 
