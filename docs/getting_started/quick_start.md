@@ -7,7 +7,7 @@
 1. Clone the repo
     - `git clone https://github.com/augcog/ROAR-DeCal.git && cd ROAR-Decal`
 2. Download Carla Server package
-    - [https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI](https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI)
+    - [Windows Download](https://drive.google.com/file/d/1TguaqwO9rPxCcOZ4DacJ_YQ5EoY1NJwz/view?usp=sharing)
     - put it OUTSIDE of the `ROAR-DeCal` folder, doesn't matter where
 3. Download data
     - `./download_data.bat`
@@ -31,7 +31,7 @@
 1. Clone the repo
     - `git clone https://github.com/augcog/ROAR-DeCal.git && cd ROAR-Decal`
 2. Download Carla Server package
-    - [https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI](https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI)
+    - [Linux Download](https://drive.google.com/file/d/1wU2mk5htapTEtyhsK4THIf1hp-OzvuN3/view?usp=sharing)
     - put it OUTSIDE of the `ROAR-Sim` folder, doesn't matter where
 3. Download data
     - `./download_data.sh`
@@ -57,7 +57,7 @@
 2. Clone the repo
     - `git clone https://github.com/augcog/ROAR-DeCal.git && cd ROAR-Decal`
 3. Download Carla Server package
-    - [https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI](https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI)
+    - [Windows Download](https://drive.google.com/file/d/1TguaqwO9rPxCcOZ4DacJ_YQ5EoY1NJwz/view?usp=sharing)
     - put it OUTSIDE of the `ROAR-DeCal` folder, doesn't matter where
 4. Download data
     - `./download_data.bat`
