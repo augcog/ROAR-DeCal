@@ -1,38 +1,41 @@
-from ROAR_simulation.carla_client.settings import CarlaSettings
-from ROAR_simulation.carla_client.carla_runner import CarlaRunner
 import logging
-from ROAR_simulation.roar_autonomous_system.agent_module.waypoint_following_agent import WaypointFollowingAgent
+from ROAR_simulation.roar_autonomous_system.agent_module.pid_agent import PIDAgent
 from pathlib import Path
+
 import numpy as np
+import os
+import warnings
+from ROAR_simulation.carla_client.carla_roar_config import Configuration
+from ROAR_simulation.carla_client.carla_runner import CarlaRunner
+
 
 def main():
-    log_level = logging.DEBUG
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=log_level)
+    config = Configuration.parse_file(
+        Path(os.getcwd()) / "configurations" / "config.json"
+    )
+
+    carla_runner = CarlaRunner(carla_settings=config.carla_config,
+                               agent_settings=config.agent_config)
+    try:
+        my_vehicle = carla_runner.set_carla_world()
+        # agent = PurePursuitAgent(vehicle=my_vehicle, agent_settings=config.agent_config)
+        agent = PIDAgent(vehicle=my_vehicle, agent_settings=config.agent_config)
+        # agent = MPCAgent(vehicle=my_vehicle, agent_settings=config.agent_config)
+        carla_runner.start_game_loop(agent=agent, use_manual_control=False)
+    except Exception as e:
+        carla_runner.on_finish()
+        logging.error(f"{e}. Might be a good idea to restart Server")
+
+
+if __name__ == "__main__":
+    logging.basicConfig(format='%(asctime)s - %(name)s '
+                               '- %(levelname)s - %(message)s',
+                        level=logging.DEBUG)
     logging.getLogger("matplotlib").setLevel(logging.WARNING)
-    settings = CarlaSettings()
+    warnings.simplefilter("ignore")
     np.set_printoptions(suppress=True)
 
-    try:
-        carla_runner = CarlaRunner(carla_settings=settings)
-        my_vehicle = carla_runner.set_carla_world()
-        # agent = PurePursuitAgent(vehicle=my_vehicle, route_file_path=Path(settings.waypoint_file_path))
-
-        # agent = SemanticSegmentationAgent(
-        #     vehicle=my_vehicle,
-        #     front_depth_camera=settings.front_depth_cam,
-        # )
-        agent = WaypointFollowingAgent(vehicle=my_vehicle,
-                                       front_depth_camera=settings.front_depth_cam,
-                                       front_rgb_camera=settings.front_rgb_cam,
-                                       rear_rgb_camera=settings.rear_rgb_cam,
-                                       route_file_path=Path(settings.waypoint_file_path),
-                                       target_speed=120)
-        carla_runner.start_game_loop(agent=agent, use_manual_control=True)
-    except Exception as e:
-        print(f"ERROR: Something bad happened. Safely exiting. Error:{e}")
-
-
-if __name__ == '__main__':
     main()
+
 
 

@@ -7,8 +7,14 @@
 """ This module contains PID controllers to perform lateral and longitudinal control. """
 from pydantic import BaseModel, Field
 from ROAR_simulation.roar_autonomous_system.control_module.controller import Controller
-from ROAR_simulation.roar_autonomous_system.utilities_module.vehicle_models import VehicleControl, Vehicle
-from ROAR_simulation.roar_autonomous_system.utilities_module.data_structures_models import Transform, Location
+from ROAR_simulation.roar_autonomous_system.utilities_module.vehicle_models import (
+    VehicleControl,
+    Vehicle,
+)
+from ROAR_simulation.roar_autonomous_system.utilities_module.data_structures_models import (
+    Transform,
+    Location,
+)
 from collections import deque
 import numpy as np
 import math
@@ -32,7 +38,7 @@ class PIDParam(BaseModel):
 
 # speed - LateralPIDParam
 OPTIMIZED_LATERAL_PID_VALUES = {
-    60: PIDParam(K_P=0.5, K_D=0.5, K_I=0.2),
+    60:  PIDParam(K_P=0.5, K_D=0.5, K_I=0.5),
     100: PIDParam(K_P=0.2, K_D=0.2, K_I=0.5),
     150: PIDParam(K_P=0.01, K_D=0.075, K_I=0.7),
 }
@@ -45,56 +51,64 @@ class VehiclePIDController(Controller):
     low level control a vehicle from client side
     """
 
-    def __init__(self,
-                 vehicle: Vehicle,
-                 args_lateral: PIDParam,
-                 args_longitudinal: PIDParam,
-                 target_speed=float("inf"),
-                 max_throttle=1,
-                 max_steering=1):
+    def __init__(
+        self,
+        vehicle: Vehicle,
+        args_lateral: PIDParam,
+        args_longitudinal: PIDParam,
+        target_speed=float("inf"),
+        max_throttle=1,
+        max_steering=1,
+    ):
         """
-        Constructor method.
-        :param vehicle: actor to apply to local planner logic onto
-        :param args_lateral: dictionary of arguments to set the lateral PID control
-        using the following semantics:
-            K_P -- Proportional term
-            K_D -- Differential term
-            K_I -- Integral term
-        :param args_longitudinal: dictionary of arguments to set the longitudinal
-        PID control using the following semantics:
-            K_P -- Proportional term
-            K_D -- Differential term
-            K_I -- Integral term
+
+        Args:
+            vehicle: actor to apply to local planner logic onto
+            args_lateral:  dictionary of arguments to set the lateral PID control
+            args_longitudinal: dictionary of arguments to set the longitudinal
+            target_speed: target speedd in km/h
+            max_throttle: maximum throttle from, will be capped at 1
+            max_steering: absolute maximum steering ranging from -1 - 1
         """
 
         super().__init__(vehicle)
-        self.logger = logging.Logger(__name__)
+        self.logger = logging.getLogger(__name__)
         self.max_throttle = max_throttle
         self.max_steer = max_steering
 
         self.target_speed = target_speed
 
         self.past_steering = self.vehicle.control.steering
-        self._lon_controller = PIDLongitudinalController(self.vehicle,
-                                                         K_P=args_longitudinal.K_P,
-                                                         K_D=args_longitudinal.K_D,
-                                                         K_I=args_longitudinal.K_I,
-                                                         dt=args_longitudinal.dt)
-        self._lat_controller = PIDLateralController(self.vehicle,
-                                                    K_P=args_lateral.K_P,
-                                                    K_D=args_lateral.K_D,
-                                                    K_I=args_lateral.K_I,
-                                                    dt=args_lateral.dt)
+        self._lon_controller = PIDLongitudinalController(
+            self.vehicle,
+            K_P=args_longitudinal.K_P,
+            K_D=args_longitudinal.K_D,
+            K_I=args_longitudinal.K_I,
+            dt=args_longitudinal.dt,
+        )
+        self._lat_controller = PIDLateralController(
+            self.vehicle,
+            K_P=args_lateral.K_P,
+            K_D=args_lateral.K_D,
+            K_I=args_lateral.K_I,
+            dt=args_lateral.dt,
+        )
         self.logger.debug("PID Controller initiated")
 
-    def run_step(self, vehicle: Vehicle, next_waypoint: Transform, **kwargs) -> VehicleControl:
+    def run_step(
+        self, vehicle: Vehicle, next_waypoint: Transform, **kwargs
+    ) -> VehicleControl:
         """
         Execute one step of control invoking both lateral and longitudinal
-        PID controllers to reach a target waypoint
-        at a given target_speed.
-            :param next_waypoint: target location encoded as a waypoint
-            :param target_speed: desired vehicle speed
-            :return: distance (in meters) to the waypoint
+        PID controllers to reach a target waypoint at a given target_speed.
+
+        Args:
+            vehicle: New vehicle state
+            next_waypoint:  target location encoded as a waypoint
+            **kwargs:
+
+        Returns:
+            Next Vehicle Control
         """
         super(VehiclePIDController, self).run_step(vehicle, next_waypoint)
         curr_speed = Vehicle.get_speed(self.vehicle)
@@ -113,7 +127,6 @@ class VehiclePIDController(Controller):
 
         acceptable_target_speed = self.target_speed
         if abs(self.vehicle.control.steering) < 0.05:
-            self.logger.debug("Eco Boost in effect")
             acceptable_target_speed += 20  # eco boost
 
         acceleration = self._lon_controller.run_step(acceptable_target_speed)
@@ -145,7 +158,7 @@ class VehiclePIDController(Controller):
         self.past_steering = steering
         return control
 
-    def sync_data(self, vehicle):
+    def sync_data(self, vehicle) -> None:
         super(VehiclePIDController, self).sync_data(vehicle=vehicle)
         self._lon_controller.vehicle = self.vehicle
         self._lat_controller.vehicle = self.vehicle
@@ -198,7 +211,11 @@ class PIDLongitudinalController:
         else:
             _de = 0.0
             _ie = 0.0
-        output = float(np.clip((self._k_p * error) + (self._k_d * _de) + (self._k_i * _ie), -1.0, 1.0))
+        output = float(
+            np.clip(
+                (self._k_p * error) + (self._k_d * _de) + (self._k_i * _ie), -1.0, 1.0
+            )
+        )
 
         return output
 
@@ -233,7 +250,9 @@ class PIDLateralController:
             -1 maximum steering to left
             +1 maximum steering to right
         """
-        return self._pid_control(target_waypoint=target_waypoint, vehicle_transform=self.vehicle.transform)
+        return self._pid_control(
+            target_waypoint=target_waypoint, vehicle_transform=self.vehicle.transform
+        )
 
     def _pid_control(self, target_waypoint, vehicle_transform) -> float:
         """
@@ -244,16 +263,28 @@ class PIDLateralController:
         """
         # calculate a vector that represent where you are going
         v_begin = vehicle_transform.location
-        v_end = v_begin + Location(x=math.cos(math.radians(vehicle_transform.rotation.yaw)),
-                                   y=math.sin(math.radians(vehicle_transform.rotation.yaw)),
-                                   z=0)
+        v_end = v_begin + Location(
+            x=math.cos(math.radians(vehicle_transform.rotation.yaw)),
+            y=math.sin(math.radians(vehicle_transform.rotation.yaw)),
+            z=0,
+        )
         v_vec = np.array([v_end.x - v_begin.x, v_end.y - v_begin.y, 0.0])
 
         # calculate error projection
-        w_vec = np.array([target_waypoint.location.x - v_begin.x,
-                          target_waypoint.location.y - v_begin.y,
-                          0.0])
-        _dot = math.acos(np.clip(np.dot(w_vec, v_vec) / (np.linalg.norm(w_vec) * np.linalg.norm(v_vec)), -1.0, 1.0))
+        w_vec = np.array(
+            [
+                target_waypoint.location.x - v_begin.x,
+                target_waypoint.location.y - v_begin.y,
+                0.0,
+            ]
+        )
+        _dot = math.acos(
+            np.clip(
+                np.dot(w_vec, v_vec) / (np.linalg.norm(w_vec) * np.linalg.norm(v_vec)),
+                -1.0,
+                1.0,
+            )
+        )
 
         _cross = np.cross(v_vec, w_vec)
 
@@ -268,4 +299,6 @@ class PIDLateralController:
             _de = 0.0
             _ie = 0.0
 
-        return float(np.clip((self.k_p * _dot) + (self.k_d * _de) + (self.k_i * _ie), -1.0, 1.0))
+        return float(
+            np.clip((self.k_p * _dot) + (self.k_d * _de) + (self.k_i * _ie), -1.0, 1.0)
+        )

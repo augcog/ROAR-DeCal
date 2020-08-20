@@ -4,37 +4,50 @@ import logging
 import random
 import sys
 from ROAR_simulation.bridges.carla_bridge import CarlaBridge
-from ROAR_simulation.carla_client.settings import CarlaSettings
+from ROAR_simulation.carla_client.carla_config import CarlaConfig
 from ROAR_simulation.carla_client.util.hud import HUD
-from ROAR_simulation.carla_client.util.utilities import CarlaCarColor, CarlaCarColors, get_actor_display_name
-from ROAR_simulation.carla_client.util.sensors import CollisionSensor, GnssSensor, LaneInvasionSensor, IMUSensor, RadarSensor
+
+from ROAR_simulation.carla_client.util.utilities import CarlaCarColor, \
+    CarlaCarColors, get_actor_display_name
+from ROAR_simulation.carla_client.util.sensors import CollisionSensor, \
+    GnssSensor, LaneInvasionSensor, IMUSensor, RadarSensor
 from ROAR_simulation.carla_client.util.camera_manager import CameraManager
+from ROAR_simulation.roar_autonomous_system.utilities_module.agent_config \
+    import \
+    AgentConfig
 import weakref
+from typing import List, Dict, Tuple, Any
 
 
 class World(object):
     """An World that holds all display settings"""
 
-    def __init__(self, carla_world: carla.World, hud: HUD, settings: CarlaSettings):
-        """Create a World with the given carla_world, head-up display and server setting."""
+    def __init__(self, carla_world: carla.World,
+                 hud: HUD, carla_settings: CarlaConfig,
+                 agent_settings: AgentConfig):
+        """Create a World with the given carla_world, head-up display and
+        server setting."""
 
         self.logger = logging.getLogger(__name__)
-        self.settings: CarlaSettings = settings
+        self.carla_settings: CarlaConfig = carla_settings
+        self.agent_settings: AgentConfig = agent_settings
         self.carla_world: carla.World = carla_world
-        self.actor_role_name = settings.role_name
+        self.actor_role_name = carla_settings.role_name
         try:
             self.map = self.carla_world.get_map()
         except RuntimeError as error:
             print('RuntimeError: {}'.format(error))
             print('  The server could not send the OpenDRIVE (.xodr) file:')
-            print('  Make sure it exists, has the same name of your town, and is correct.')
+            print(
+                '  Make sure it exists, has the same name of your town, '
+                'and is correct.')
             sys.exit(1)
         self.hud = hud
         self.carla_bridge = CarlaBridge()
-        self._spawn_point_id = settings.spawn_point_id
-        self._actor_filter = settings.carla_vehicle_blueprint_filter
-        self._car_color = settings.car_color
-        self._gamma = settings.gamma
+        self._spawn_point_id = agent_settings.spawn_point_id
+        self._actor_filter = carla_settings.carla_vehicle_blueprint_filter
+        self._car_color = carla_settings.car_color
+        self._gamma = carla_settings.gamma
         self.player = None
         self.collision_sensor = None
         self.lane_invasion_sensor = None
@@ -48,18 +61,22 @@ class World(object):
         self.front_rgb_sensor = None
         self.front_depth_sensor = None
         self.rear_rgb_sensor = None
+        self.semantic_segmentation_sensor = None
 
         self.recording_start = 0
         # set weather
         self.logger.debug("Setting Weather")
-        self.set_weather(settings.carla_weather.to_carla_weather_params())
+        self.set_weather(
+            carla_settings.carla_weather.to_carla_weather_params())
 
         # set player
         self.logger.debug("Setting Player")
-        self.set_player(actor_filter=self._actor_filter,
-                        player_role_name=self.actor_role_name,
-                        color=self._car_color,
-                        spawn_point_id=self._spawn_point_id)
+        self.player = self.spawn_actor(
+            actor_filter=self._actor_filter,
+            player_role_name=self.actor_role_name,
+            color=self._car_color,
+            spawn_point_id=self._spawn_point_id,
+        )
         # set camera
         self.logger.debug("Setting Camera")
         self.set_camera()
@@ -74,25 +91,43 @@ class World(object):
         self.front_rgb_sensor_data = None
         self.front_depth_sensor_data = None
         self.rear_rgb_sensor_data = None
+        self.semantic_segmentation_sensor_data = None
+
+        # spawn npc
+        self.npcs_mapping: Dict[str, Tuple[Any, AgentConfig]] = {}
+
+        settings = self.carla_world.get_settings()
+        settings.synchronous_mode = self.carla_settings.synchronous_mode
+        settings.no_rendering_mode = self.carla_settings.no_rendering_mode
+        if self.carla_settings.synchronous_mode:
+            settings.fixed_delta_seconds = self.carla_settings.fixed_delta_seconds
+        self.carla_world.apply_settings(settings)
 
         self.carla_world.on_tick(hud.on_world_tick)
         self.logger.debug("World Initialized")
 
-    def set_player(self, actor_filter: str = "vehicle.tesla.model3", player_role_name: str = "hero",
-                   color: CarlaCarColor = CarlaCarColors.GREY, spawn_point_id: int = random.choice(list(range(8)))):
+    def spawn_actor(self, actor_filter: str = "vehicle.tesla.model3",
+                    player_role_name: str = "npc",
+                    color: CarlaCarColor = CarlaCarColors.GREY,
+                    spawn_point_id: int = random.choice(list(range(8)))):
         """Set up a hero-named player with Grey Tesla Model3 Vehicle """
 
         blueprint = self.carla_world.get_blueprint_library().find(actor_filter)
-        blueprint.set_attribute('role_name', player_role_name)
-        if blueprint.has_attribute('color'):
-            blueprint.set_attribute('color', color.to_string())
-        if blueprint.has_attribute('is_invincible'):
+        blueprint.set_attribute("role_name", player_role_name)
+        if blueprint.has_attribute("color"):
+            blueprint.set_attribute("color", color.to_string())
+        if blueprint.has_attribute("is_invincible"):
             self.logger.debug("TESLA IS INVINCIBLE")
-            blueprint.set_attribute('is_invincible', 'true')
+            blueprint.set_attribute("is_invincible", "true")
         try:
-            self.player = self.carla_world.spawn_actor(blueprint, self.map.get_spawn_points()[spawn_point_id])
+            actor = \
+                self.carla_world.spawn_actor(blueprint,
+                                             self.map.get_spawn_points()[
+                                                 spawn_point_id])
+            return actor
         except Exception as e:
-            raise ValueError(f"Cannot spawn actor at ID [{spawn_point_id}]. Error: {e}")
+            raise ValueError(f"Cannot spawn actor at ID [{spawn_point_id}]. "
+                             f"Error: {e}")
 
     def set_camera(self, cam_index: int = 0, cam_pos_index: int = 0):
         self.camera_manager = CameraManager(self.player, self.hud, self._gamma)
@@ -117,6 +152,8 @@ class World(object):
     def tick(self, clock):
         self.time_counter += 1
         self.hud.tick(self, clock)
+        if self.carla_settings.synchronous_mode:
+            self.carla_world.tick()
 
     def render(self, display):
         self.camera_manager.render(display)
@@ -128,7 +165,8 @@ class World(object):
         self.camera_manager.index = None
 
     def destroy(self):
-        self.logger.debug(f"destroying all actors belonging to [{self.actor_role_name}] in this world")
+        self.logger.debug(f"destroying all actors belonging to "
+                          f"[{self.actor_role_name}] in this world")
         if self.radar_sensor is not None:
             self.toggle_radar()
         actors = [
@@ -137,11 +175,15 @@ class World(object):
             self.lane_invasion_sensor.sensor,
             self.gnss_sensor.sensor,
             self.imu_sensor.sensor,
-            self.player]
+            self.player,
+        ]
         for actor in actors:
             if actor is not None:
                 actor.destroy()
+
         self._destroy_custom_sensors()
+        for npc, _ in self.npcs_mapping.values():
+            npc.destroy()
 
     def set_weather(self, new_weather: carla.WeatherParameters):
         self.carla_world.weather = new_weather
@@ -150,50 +192,74 @@ class World(object):
 
         Attachment = carla.AttachmentType
         self._destroy_custom_sensors()
-        self.front_rgb_sensor = self._spawn_custom_sensor(blueprint_filter="sensor.camera.rgb",
-                                                          transform=self.carla_bridge.
-                                                          convert_transform_from_agent_to_source(
-                                                              self.settings.front_rgb_cam.transform),
-                                                          attachment=Attachment.Rigid,
-                                                          attributes={
-                                                              "fov": self.settings.front_rgb_cam.fov,
-                                                          })
-        self.front_depth_sensor = self._spawn_custom_sensor(blueprint_filter="sensor.camera.depth",
-                                                            transform=self.carla_bridge.
-                                                            convert_transform_from_agent_to_source(
-                                                                self.settings.front_depth_cam.transform),
-                                                            attachment=Attachment.Rigid,
-                                                            attributes={
-                                                                "fov": self.settings.front_depth_cam.fov,
-                                                            })
-        self.rear_rgb_sensor = self._spawn_custom_sensor(blueprint_filter="sensor.camera.rgb",
-                                                         transform=self.carla_bridge.
-                                                         convert_transform_from_agent_to_source(
-                                                             self.settings.rear_rgb_cam.transform),
-                                                         attachment=Attachment.Rigid,
-                                                         attributes={
-                                                             "fov": self.settings.rear_rgb_cam.fov,
-                                                         })
+        self.front_rgb_sensor = self._spawn_custom_sensor(
+            blueprint_filter="sensor.camera.rgb",
+            transform=self.carla_bridge.convert_transform_from_agent_to_source(
+                self.agent_settings.front_rgb_cam.transform),
+            attachment=Attachment.Rigid,
+            attributes={
+                "fov": self.agent_settings.front_rgb_cam.fov,
+            })
+        self.front_depth_sensor = self._spawn_custom_sensor(
+            blueprint_filter="sensor.camera.depth",
+            transform=self.carla_bridge.convert_transform_from_agent_to_source(
+                self.agent_settings.front_depth_cam.transform),
+            attachment=Attachment.Rigid,
+            attributes={
+                "fov": self.agent_settings.front_depth_cam.fov,
+            })
+        self.rear_rgb_sensor = \
+            self._spawn_custom_sensor(
+                blueprint_filter="sensor.camera.rgb",
+                transform=self.carla_bridge.
+                    convert_transform_from_agent_to_source(
+                    self.agent_settings.rear_rgb_cam.transform),
+                attachment=Attachment.Rigid,
+                attributes={
+                    "fov":
+                        self.agent_settings.rear_rgb_cam.fov,
+                })
+
+        if self.carla_settings.save_semantic_segmentation:
+            self.semantic_segmentation_sensor = self._spawn_custom_sensor(
+                blueprint_filter="sensor.camera.semantic_segmentation",
+                transform=self.carla_bridge.convert_transform_from_agent_to_source(
+                    self.agent_settings.front_depth_cam.transform
+                ),
+                attachment=Attachment.Rigid,
+                attributes={"fov": self.agent_settings.front_depth_cam.fov},
+            )
 
         weak_self = weakref.ref(self)
         self.front_rgb_sensor.listen(
-            lambda image: World._parse_front_rgb_sensor_image(weak_self=weak_self, image=image))
+            lambda image: World._parse_front_rgb_sensor_image(
+                weak_self=weak_self, image=image))
         self.front_depth_sensor.listen(
-            lambda image: World._parse_front_depth_sensor_image(weak_self=weak_self, image=image))
-        self.rear_rgb_sensor.listen(lambda image: World._parse_rear_rgb_sensor_image(weak_self=weak_self, image=image))
+            lambda image: World._parse_front_depth_sensor_image(
+                weak_self=weak_self, image=image))
+        self.rear_rgb_sensor.listen(lambda image:
+                                    World._parse_rear_rgb_sensor_image(
+                                        weak_self=weak_self, image=image))
+        if self.carla_settings.save_semantic_segmentation:
+            self.semantic_segmentation_sensor.listen(lambda image: World._parse_semantic_segmentation_image(
+                weak_self=weak_self, image=image
+            ))
 
     def _spawn_custom_sensor(self, blueprint_filter: str,
                              transform: carla.Transform,
                              attachment: carla.AttachmentType,
                              attributes: dict):
-        blueprint = self.carla_world.get_blueprint_library().find(blueprint_filter)
+        blueprint = self.carla_world.get_blueprint_library(). \
+            find(blueprint_filter)
         for key, val in attributes.items():
             if blueprint.has_attribute(key):
                 blueprint.set_attribute(key, str(val))
             else:
-                self.logger.error(f"Unable to set attribute [{key}] for blueprint [{blueprint_filter}]")
+                self.logger.error(f"Unable to set attribute [{key}] "
+                                  f"for blueprint [{blueprint_filter}]")
 
-        return self.carla_world.spawn_actor(blueprint, transform, self.player, attachment)
+        return self.carla_world.spawn_actor(blueprint, transform,
+                                            self.player, attachment)
 
     def _destroy_custom_sensors(self):
         if self.front_rgb_sensor is not None:
@@ -204,6 +270,9 @@ class World(object):
 
         if self.rear_rgb_sensor is not None:
             self.rear_rgb_sensor.destroy()
+
+        if self.semantic_segmentation_sensor is not None:
+            self.semantic_segmentation_sensor.destroy()
 
     @staticmethod
     def _parse_front_rgb_sensor_image(weak_self, image):
@@ -217,8 +286,7 @@ class World(object):
         self = weak_self()
         if not self:
             return
-        # image.convert(cc.LogarithmicDepth)
-        image.convert(cc.Depth)
+        # image.convert(cc.Raw)
         self.front_depth_sensor_data = image
 
     @staticmethod
@@ -228,3 +296,21 @@ class World(object):
             return
         image.convert(cc.Raw)
         self.rear_rgb_sensor_data = image
+
+    @staticmethod
+    def _parse_semantic_segmentation_image(weak_self, image):
+        self = weak_self()
+        if not self:
+            return
+        # image.convert(cc.CityScapesPalette)
+        self.semantic_segmentation_sensor_data = image
+
+    def spawn_npcs(self, npc_configs: List[AgentConfig]):
+        for npc_config in npc_configs:
+            self.logger.debug(f"Spawning NPC [{npc_config.name}]")
+            try:
+                npc = self.spawn_actor(spawn_point_id=npc_config.spawn_point_id)
+                self.npcs_mapping[npc_config.name] = (npc, npc_config)
+            except Exception as e:
+                self.logger.error(f"Failed to Spawn NPC {'default'}."
+                                  f"Error: {e}")

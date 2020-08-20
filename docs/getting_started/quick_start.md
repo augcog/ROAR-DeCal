@@ -1,27 +1,81 @@
-# ROAR Carla Simulation
 
-## QuickStart
-**Required Equipment:** Linux/Windows Computer
+**Platforms Tested:** Ubuntu 18.04, Windows 10, MacOS Catalina
     
-**Approximate Time:** 15 minutes    
+**Approximate Time:** ~10 minutes    
 
-0. Download the this code [here](https://drive.google.com/file/d/12vOc6ukmZjkahjXZCWq-hy0iDBiEuEZq/view?usp=sharing) [as of writing this readme, we still need to create a public github repo]
-1. Download the right distribution of Carla for your Operation System [here](https://drive.google.com/drive/folders/1xGz2r6fiXCHn57_ZOS710RX2IoCKzWWx)
-    - You should download either `roar_easy_linux.zip` or `roar_easy_windows.zip`
-2. Initiate a virtual environment.
+#### Windows
+1. Clone the repo
+    - `git clone https://github.com/augcog/ROAR-DeCal.git && cd ROAR-Decal`
+2. Download Carla Server package
+    - [Windows Download](https://drive.google.com/file/d/1TguaqwO9rPxCcOZ4DacJ_YQ5EoY1NJwz/view?usp=sharing)
+    - put it OUTSIDE of the `ROAR-DeCal` folder, doesn't matter where
+3. Download data
+    - `./download_data.bat`
+4. Check your file directory, it should be:
+    - `ROAR-Sim`
+        - `data`
+            - `easy_map_waypoints.txt`
+            - `... other data files`
+        - `ROAR_simulation`
+        - `runner.py`
+        - ... other files and folders
+5. Create virtual environment and install dependencies
     - `conda create -n ROAR python=3.7`
     - `conda activate ROAR`
-3. Install required packages
     - `pip install -r requirements.txt`
-4. You are all set up.
-    - Start the server
-        - on Windows, you may double click the `CarlaUE4.exe` or you may use a commandline prompt and type in `CarlaUE4.exe`
-        - on Ubuntu, you can directly type `./CarlaUE4.sh`
-    - Start Client connection
-        - `python carla_runner.py`
-        - You should be on manual control now. 
-        - To switch to autonomous mode, open up `carla_runner.py` and scroll down the end, change the line `settings.enable_aut
+6. Enjoy
+    - `.CarlaUE4.exe` file in the Carla Server package to launch the server
+    - `python runner.py`
         
+#### Linux
+1. Clone the repo
+    - `git clone https://github.com/augcog/ROAR-DeCal.git && cd ROAR-Decal`
+2. Download Carla Server package
+    - [Linux Download](https://drive.google.com/file/d/1wU2mk5htapTEtyhsK4THIf1hp-OzvuN3/view?usp=sharing)
+    - put it OUTSIDE of the `ROAR-Sim` folder, doesn't matter where
+3. Download data
+    - `./download_data.sh`
+4. Check your file directory, it should be:
+    - `ROAR-Sim`
+        - `data`
+            - `easy_map_waypoints.txt`
+            - `... other data files`
+        - `ROAR_simulation`
+        - `runner.py`
+        - ... other files and folders
+5. Create virtual environment and install dependencies
+    - `conda create -n ROAR python=3.7`
+    - `conda activate ROAR`
+    - `pip install -r requirements.txt`
+6. Enjoy
+    - `./CarlaUE4.sh` file in the Carla Server package to launch the server
+    - `python runner.py`
+    
+    
+#### Mac
+1. Press and hold the Option (or Alt) ⌥ key during startup to switch to Windows.
+2. Clone the repo
+    - `git clone https://github.com/augcog/ROAR-DeCal.git && cd ROAR-Decal`
+3. Download Carla Server package
+    - [Windows Download](https://drive.google.com/file/d/1TguaqwO9rPxCcOZ4DacJ_YQ5EoY1NJwz/view?usp=sharing)
+    - put it OUTSIDE of the `ROAR-DeCal` folder, doesn't matter where
+4. Download data
+    - `./download_data.bat`
+5. Check your file directory, it should be:
+    - `ROAR-Sim`
+        - `data`
+            - `easy_map_waypoints.txt`
+            - `... other data files`
+        - `ROAR_simulation`
+        - `runner.py`
+        - ... other files and folders
+6. Create virtual environment and install dependencies on Anaconda Prompt
+    - `conda create -n ROAR python=3.7`
+    - `conda activate ROAR`
+    - `pip install -r requirements.txt`
+7. Enjoy
+    - `CarlaUE4.exe` file in the Carla Server package to launch the server
+    - `python runner.py`
 
 ### Common Errors
 1. Conda not found 
