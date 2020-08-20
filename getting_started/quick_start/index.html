@@ -374,7 +374,7 @@
 </ul>
 </li>
 <li>Download Carla Server package<ul>
-<li><a href="https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI">https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI</a></li>
+<li><a href="https://drive.google.com/file/d/1TguaqwO9rPxCcOZ4DacJ_YQ5EoY1NJwz/view?usp=sharing">Windows Download</a></li>
 <li>put it OUTSIDE of the <code>ROAR-DeCal</code> folder, doesn't matter where</li>
 </ul>
 </li>
@@ -415,7 +415,7 @@
 </ul>
 </li>
 <li>Download Carla Server package<ul>
-<li><a href="https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI">https://drive.google.com/drive/folders/1FlkNCNENaC3qrTub7mqra7EH7iSbRNiI</a></li>
+<li><a href="https://drive.google.com/file/d/1wU2mk5htapTEtyhsK4THIf1hp-OzvuN3/view?usp=sharing">Linux Download</a></li>
 <li>put it OUTSIDE of the <code>ROAR-Sim</code> folder, doesn't matter where</li>
 </ul>
 </li>
@@ -450,7 +450,47 @@
 </li>
 </ol>
 <h4 id="mac">Mac<a class="headerlink" href="#mac" title="Permanent link">¤</a></h4>
-<p>@Sunny, please fill in here</p>
+<ol>
+<li>Press and hold the Option (or Alt) ⌥ key during startup to switch to Windows.</li>
+<li>Clone the repo<ul>
+<li><code>git clone https://github.com/augcog/ROAR-DeCal.git &amp;&amp; cd ROAR-Decal</code></li>
+</ul>
+</li>
+<li>Download Carla Server package<ul>
+<li><a href="https://drive.google.com/file/d/1TguaqwO9rPxCcOZ4DacJ_YQ5EoY1NJwz/view?usp=sharing">Windows Download</a></li>
+<li>put it OUTSIDE of the <code>ROAR-DeCal</code> folder, doesn't matter where</li>
+</ul>
+</li>
+<li>Download data<ul>
+<li><code>./download_data.bat</code></li>
+</ul>
+</li>
+<li>Check your file directory, it should be:<ul>
+<li><code>ROAR-Sim</code><ul>
+<li><code>data</code><ul>
+<li><code>easy_map_waypoints.txt</code></li>
+<li><code>... other data files</code></li>
+</ul>
+</li>
+<li><code>ROAR_simulation</code></li>
+<li><code>runner.py</code></li>
+<li>... other files and folders</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Create virtual environment and install dependencies on Anaconda Prompt<ul>
+<li><code>conda create -n ROAR python=3.7</code></li>
+<li><code>conda activate ROAR</code></li>
+<li><code>pip install -r requirements.txt</code></li>
+</ul>
+</li>
+<li>Enjoy<ul>
+<li><code>CarlaUE4.exe</code> file in the Carla Server package to launch the server</li>
+<li><code>python runner.py</code></li>
+</ul>
+</li>
+</ol>
 <h3 id="common-errors">Common Errors<a class="headerlink" href="#common-errors" title="Permanent link">¤</a></h3>
 <ol>
 <li>Conda not found <ul>
