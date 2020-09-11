@@ -36,7 +36,7 @@
 3. Download data
     - `./download_data.sh`
 4. Check your file directory, it should be:
-    - `ROAR-Sim`
+    - `ROAR-Decal`
         - `data`
             - `easy_map_waypoints.txt`
             - `... other data files`
@@ -62,7 +62,7 @@
 4. Download data
     - `./download_data.bat`
 5. Check your file directory, it should be:
-    - `ROAR-Sim`
+    - `ROAR-Decal`
         - `data`
             - `easy_map_waypoints.txt`
             - `... other data files`
