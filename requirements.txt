@@ -2,7 +2,7 @@ imageio==2.8.0
 imageio-ffmpeg==0.4.2
 numpy==1.19.0
 opencv-python==4.2.0.34
-pydantic==1.5.1
+pydantic==1.6.2
 pygame==1.9.6
 scipy==1.5.0
 pandas
